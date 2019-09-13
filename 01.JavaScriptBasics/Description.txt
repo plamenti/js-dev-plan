@@ -1,0 +1,5 @@
+1. Learn Basic JavaScript
+First 11 chapters from http://eloquentjavascript.net/index.html
+Solve all problems in the Exercises section of each chapter
+Senior developer to help and review the solutions
+Move on to the next chapter when all problems are solved in a good manner.
