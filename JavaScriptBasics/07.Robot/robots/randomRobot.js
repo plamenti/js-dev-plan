@@ -1,5 +1,5 @@
-const randomPick = require('./randomPick');
-const roadGraph = require('./roadGraph');
+const randomPick = require('../lib/randomPick');
+const roadGraph = require('../lib/roadGraph');
 
 function randomRobot(state) {
     return { direction: randomPick(roadGraph[state.place]) };

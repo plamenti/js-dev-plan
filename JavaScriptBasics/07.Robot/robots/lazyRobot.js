@@ -1,5 +1,5 @@
-const roadGraph = require('./roadGraph');
-const findRoute = require('./findRoute');
+const roadGraph = require('../lib/roadGraph');
+const findRoute = require('../lib/findRoute');
 
 function lazyRobot({ place, parcels }, route) {
   if (route.length == 0) {
