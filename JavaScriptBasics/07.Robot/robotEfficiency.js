@@ -1,7 +1,7 @@
 const VillageState = require('./villageState');
-const randomRobot = require('./randomRobot');
-const routeRobot = require('./routeRobot');
 const goalOrientedRobot = require('./goalOrientedRobot');
+const lazyRobot = require('./lazyRobot');
+
 
 function runRobot(state, robot, memory) {
     for (let turn = 0; ; turn++) {
@@ -40,4 +40,4 @@ function compareRobots(robot1, memory1, robot2, memory2) {
     console.log(`Average number of steps for robot 2: ${robot2AverageSteps}`);
 }
 
-compareRobots(routeRobot, [], goalOrientedRobot, []);
+compareRobots(lazyRobot, [], goalOrientedRobot, []);
