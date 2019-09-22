@@ -24,7 +24,7 @@ function lazyRobot({ place, parcels }, route) {
     function score({ route, pickUp }) {
       return (pickUp ? 0.5 : 0) - route.length;
     }
-    
+
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
 
