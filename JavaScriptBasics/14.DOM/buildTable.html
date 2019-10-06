@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    table {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    th {
+      border: 1px solid black;
+    }
+
+    td {
+      border: 1px solid black;
+    }
+  </style>
+  <title>Build a table</title>
+</head>
+
+<body>
+
+  <h1>Mountains</h1>
+
+  <div id="mountains"></div>
+
+  <script>
+    const MOUNTAINS = [
+      { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
+      { name: "Everest", height: 8848, place: "Nepal" },
+      { name: "Mount Fuji", height: 3776, place: "Japan" },
+      { name: "Vaalserberg", height: 323, place: "Netherlands" },
+      { name: "Denali", height: 6168, place: "United States" },
+      { name: "Popocatepetl", height: 5465, place: "Mexico" },
+      { name: "Mont Blanc", height: 4808, place: "Italy/France" }
+    ];
+
+    let table = document.createElement('table');
+    let headerRow = document.createElement('tr');
+    let record = MOUNTAINS[0];
+    for (const key in record) {
+      if (record.hasOwnProperty(key)) {
+        let header = document.createTextNode(key);
+        let th = document.createElement('th');
+        th.appendChild(header);
+        headerRow.appendChild(th);
+      }
+    }
+
+    table.appendChild(headerRow);
+
+    MOUNTAINS.forEach(element => {
+      let row = document.createElement('tr');
+      for (const key in element) {
+        let cell = document.createElement('td');
+        if (element.hasOwnProperty(key)) {
+          key === 'height' && (cell.style.textAlign = 'right');
+          let cellContent = document.createTextNode(element[key]);
+          cell.appendChild(cellContent);
+        }
+
+        row.appendChild(cell);
+      }
+
+      table.appendChild(row);
+    });
+
+    document.getElementById('mountains').appendChild(table);
+  </script>
+</body>
+
+</html>
