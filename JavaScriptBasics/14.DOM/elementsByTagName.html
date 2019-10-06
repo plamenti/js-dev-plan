@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Heading with a <span>span</span> element.</h1>
+    <p>A paragraph with <span>one</span>, <span>two</span> spans.</p>
+
+    <script>
+        function byTagName(node, tagName) {
+            let foundElements = [];
+            
+            function traverse(node) {
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    let childElement = node.childNodes[i];
+                    if(childElement.nodeType == document.ELEMENT_NODE) {
+                        if (childElement.nodeName.toLowerCase() == tagName.toLowerCase()) {
+                            foundElements.push(childElement);
+                        }
+
+                        traverse(childElement);
+                    }
+                    
+                }
+            }
+
+            traverse(node);
+
+            return foundElements;;
+        }
+
+        console.assert(byTagName(document.body, "h1").length == 1, 'Expected count of h1 - 1');
+        console.assert(byTagName(document.body, "span").length == 3), 'Expected count of span - 3';
+        let para = document.querySelector("p");
+        console.assert(byTagName(para, "span").length == 2, 'Expected count of span in p - 2');
+    </script>
+</body>
+
+</html>
