@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #balloon {
+            font-size: 20px;
+        }
+    </style>
+    <title>Balloon</title>
+</head>
+
+<body>
+    <div id='balloon'></div>
+    <script>
+        const balloon = document.createTextNode('🎈');
+        const balloonContainer = document.querySelector('#balloon');
+        balloonContainer.appendChild(balloon);
+        const changeSizeInPixels = 10;
+
+        document.addEventListener('keydown', event => {
+            if (event.key == 'ArrowUp') {
+                balloonContainer.style.fontSize = increaseFontWith(balloonContainer, changeSizeInPixels);
+            }
+
+            if (event.key == 'ArrowDown') {
+                balloonContainer.style.fontSize = decreaseFontWith(balloonContainer, changeSizeInPixels);
+            }
+        })
+
+        function increaseFontWith(element, increasePercents) {
+            let currentFontSize = parseFontSize(element);
+            const newFontSize = currentFontSize += (currentFontSize / 100) * increasePercents;
+
+            return `${newFontSize}px`;
+        }
+
+        function decreaseFontWith(element, decreasePercents) {
+            let currentFontSize = parseFontSize(element);
+            if (currentFontSize <= 0) {
+                return '0px';
+            }
+
+            const newFontSize = currentFontSize -= (currentFontSize / 100) * decreasePercents;
+
+            return `${newFontSize}px`;
+        }
+
+        function parseFontSize(element) {
+            const fontSize = window.getComputedStyle(element, null).getPropertyValue('font-size');
+
+            return parseFloat(fontSize);
+        }
+    </script>
+
+</body>
+
+</html>
