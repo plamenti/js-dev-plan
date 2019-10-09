@@ -16,20 +16,30 @@
 <body>
     <div id='balloon'></div>
     <script>
-        const balloon = document.createTextNode('🎈');
-        const balloonContainer = document.querySelector('#balloon');
-        balloonContainer.appendChild(balloon);
+        const balloon = document.querySelector('#balloon');
+        balloon.textContent = '🎈';
         const changeSizeInPixels = 10;
+        const balloonMaxSizeInPixels = 100;
+        const initialFontSize = parseFontSize(balloon);
 
-        document.addEventListener('keydown', event => {
+        function changeBalloon(event) {
             if (event.key == 'ArrowUp') {
-                balloonContainer.style.fontSize = increaseFontWith(balloonContainer, changeSizeInPixels);
+                if (parseFontSize(balloon) >= balloonMaxSize) {
+                    balloon.style.fontSize = `${initialFontSize}px`;
+                    balloon.textContent = '💥'
+                    document.removeEventListener('keydown', changeBalloon);
+                } else {
+                    balloon.style.fontSize = increaseFontWith(balloon, changeSizeInPixels);
+                    event.preventDefault();
+                }
             }
 
             if (event.key == 'ArrowDown') {
-                balloonContainer.style.fontSize = decreaseFontWith(balloonContainer, changeSizeInPixels);
+                balloon.style.fontSize = decreaseFontWith(balloon, changeSizeInPixels);
             }
-        })
+        }
+
+        document.addEventListener('keydown', changeBalloon);
 
         function increaseFontWith(element, increasePercents) {
             let currentFontSize = parseFontSize(element);
