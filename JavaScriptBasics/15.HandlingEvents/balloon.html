@@ -24,7 +24,7 @@
 
         function changeBalloon(event) {
             if (event.key == 'ArrowUp') {
-                if (parseFontSize(balloon) >= balloonMaxSize) {
+                if (parseFontSize(balloon) >= balloonMaxSizeInPixels) {
                     balloon.style.fontSize = `${initialFontSize}px`;
                     balloon.textContent = '💥'
                     document.removeEventListener('keydown', changeBalloon);
