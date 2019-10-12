@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .trail {
+            /* className for the trail elements */
+            position: absolute;
+            height: 6px;
+            width: 6px;
+            border-radius: 3px;
+            background: teal;
+        }
+
+        body {
+            height: 300px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const createElement = () => {
+            let trailElement = document.createElement('div');
+            trailElement.className = 'trail';
+            trailElement.x = 0;
+            trailElement.y = 0;
+
+            return trailElement;
+        };
+
+        const drawElement = (element) => {
+            document.body.appendChild(element);
+            element.style.left = `${element.x}px`;
+            element.style.top = `${element.y}px`;
+        };
+
+        const elementsCount = 5;
+        const trailElements = [];
+        for (let i = 0; i < elementsCount; i++) {
+            trailElements.push(createElement());
+        }
+
+        const trailMouse = (elements, mouseX, mouseY) => {
+            let x = mouseX;
+            let y = mouseY;
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].x = x;
+                elements[i].y = y;
+                drawElement(elements[i]);
+                let nextElement = elements[i + 1] || elements[0];
+                x += (nextElement.x - elements[i].x) * i * .25;
+                y += (nextElement.y - elements[i].y) * i * .25;
+            }
+        };
+
+        addEventListener('mousemove', (event) => {
+            trailMouse(trailElements, event.pageX, event.pageY);
+        })
+
+    </script>
+</body>
+
+</html>
