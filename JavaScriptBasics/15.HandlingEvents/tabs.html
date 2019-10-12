@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .not-visible.visible {
+            display: block;
+        }
+
+        .not-visible {
+            display: none;
+        }
+
+        .active {
+            background: greenyellow;
+        }
+
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <tab-panel>
+        <div data-tabname="one", class="not-visible visible">Tab one</div>
+        <div data-tabname="two", class="not-visible">Tab two</div>
+        <div data-tabname="three", class="not-visible">Tab three</div>
+    </tab-panel>
+    <script>
+        const toggleElement = (element) => {
+            element.classList.toggle('visible');
+        };
+
+        const toggleButton = (element) => {
+            element.classList.toggle('active');
+        };
+
+        const generateButton = (elementToHandle) => {
+            let tabButton = document.createElement('button');
+            let tabName = elementToHandle.getAttribute('data-tabname');
+            if(tabName == 'one') {
+                tabButton.classList.add('active');
+            }
+            tabButton.innerText = tabName;
+            tabButton.addEventListener('click', () => {
+                toggleElement(elementToHandle);
+                toggleButton(tabButton);
+            });
+
+            return tabButton;
+        }
+
+        const asTabs = (node) => {
+            let tabs = node.querySelectorAll('div');
+            for (let i = 0; i < tabs.length; i++) {
+                let parent = tabs[i].parentNode;
+                let button = generateButton(tabs[i]);
+                parent.insertBefore(button, tabs[0]);
+            }
+        }
+
+        asTabs(document.querySelector("tab-panel"));
+
+
+    </script>
+
+</body>
+
+</html>
